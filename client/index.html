@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Personal Safety – Panic Alert</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <!-- Status banner -->
+  <div id="statusBanner" class="status-banner hidden">🚨 Alert Sent Successfully!</div>
+
+  <div class="container">
+    <section id="setup-section" class="card hidden">
+      <h2>Setup</h2>
+      <div class="field">
+        <label>Your Name</label>
+        <input type="text" id="ownerName" placeholder="e.g., Aisha"/>
+      </div>
+      <div class="field">
+        <label>Emergency Contacts</label>
+        <div id="contacts"></div>
+        <button id="addContactBtn" class="secondary">+ Add Contact</button>
+      </div>
+      <button id="saveSetupBtn" class="primary">Save Setup</button>
+    </section>
+
+    <section id="main-section" class="hidden">
+      <div class="card" style="text-align:center;">
+        <h2>EMERGANCY ALERT SERVICE DASHBOARD</span></h2>
+        <p>Press the SOS button to alert all contacts immediately.</p>
+        <textarea id="alertMessage" placeholder="Optional message (e.g., location, situation)"></textarea>
+
+        <!-- Priority Contact Dropdown -->
+        <div class="field">
+          <label for="priorityContact">Priority Contact</label>
+          <select id="priorityContact">
+            <option value="">Select a priority contact</option>
+            <!-- You can dynamically populate these options using JavaScript -->
+            <option value="Contact1">Contact 1</option>
+            <option value="Contact2">Contact 2</option>
+            <option value="Contact3">Contact 3</option>
+          </select>
+        </div>
+
+        <!-- Police and Medical Services Checkboxes -->
+        <div class="field">
+          <label><input type="checkbox" id="policeCheckbox"/> Police</label>
+        </div>
+        <div class="field">
+          <label><input type="checkbox" id="medicalCheckbox"/> Medical Services</label>
+        </div>
+
+        <div id="sosWrapper">
+          <button id="panicBtn" class="sos-button">SOS</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Responses (Latest Alert)</h3>
+        <ul id="responsesList"></ul>
+      </div>
+
+      <div class="card">
+        <h3>Contacts</h3>
+        <ul id="contactList"></ul>
+      </div>
+    </section>
+
+    <aside>
+      <div class="card">
+        <h3>Recent Alerts</h3>
+        <ul id="alertsList"></ul>
+      </div>
+      <div class="card">
+        <h3>Logs</h3>
+        <pre id="logsBox" class="logs"></pre>
+      </div>
+    </aside>
+  </div>
+
+  <template id="contactRow">
+    <div class="contact-row">
+      <input type="text" placeholder="Name" class="c-name"/>
+      <input type="text" placeholder="Phone (e.g., +9198xxxxxxx)" class="c-phone"/>
+      <label><input type="checkbox" class="c-sms" checked/> SMS</label>
+      <label><input type="checkbox" class="c-wa"/> WhatsApp</label>
+      <button class="remove">✕</button>
+    </div>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Receiver Demo – SOS Response</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    body {
+      display:flex; justify-content:center; align-items:center;
+      height:100vh; background: linear-gradient(135deg, #0f1115, #1c1f28);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:#e9eef5;
+      margin:0;
+    }
+    .phone {
+      width: 360px; max-width:90%;
+      border: 12px solid #2a2f3a;
+      border-radius: 30px;
+      background: rgba(22,26,34,0.85);
+      padding: 20px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 0 25px rgba(0,0,0,0.5);
+      text-align:center;
+    }
+    .phone h2 { margin-top:0; color:#ff5a5a; }
+    .actions { margin-top: 20px; display:flex; gap:12px; justify-content:center; }
+    .actions button {
+      flex:1; font-size: 1rem; padding: 14px; border-radius: 12px; cursor:pointer;
+      border:none; transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .yes { background:#2f6feb; color:white; }
+    .yes:hover { transform: scale(1.05); box-shadow: 0 0 15px rgba(47,111,235,0.8); }
+    .no { background:#3a4252; color:#eee; }
+    .no:hover { transform: scale(1.05); box-shadow: 0 0 15px rgba(200,80,80,0.8); }
+    textarea {
+      width:100%; margin-top:15px; padding:10px;
+      border-radius: 10px; background:#0f131a; color:#fff; border:1px solid #2a2f3a;
+    }
+    /* Status banner */
+    .status-banner {
+      position: fixed;
+      top: -60px; left: 0; right: 0;
+      background: #2f6feb;
+      color: white;
+      text-align: center;
+      padding: 14px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      transition: top 0.4s ease, opacity 0.4s ease;
+      z-index: 1000;
+    }
+    .status-banner.visible {
+      top:0;
+      opacity:1;
+    }
+    .status-banner.hidden {
+      opacity:0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Feedback banner -->
+  <div id="statusBanner" class="status-banner hidden">✅ Response Recorded</div>
+
+  <div class="phone">
+    <h2>🚨 SOS Alert</h2>
+    <p><strong>Aisha</strong> needs your help!</p>
+    <p><em>Time:</em> <span id="time"></span></p>
+    <textarea id="note" placeholder="Optional note (e.g., On the way)"></textarea>
+    <div class="actions">
+      <button class="yes" id="btnYes">✅ I'm Responding</button>
+      <button class="no" id="btnNo">❌ Can't Respond</button>
+    </div>
+    <p id="statusMsg" style="margin-top:15px; font-size:0.9rem; color:#b8c0cc;"></p>
+  </div>
+
+  <script>
+    document.getElementById("time").textContent = new Date().toLocaleString();
+    const statusBanner = document.getElementById("statusBanner");
+    const statusMsg = document.getElementById("statusMsg");
+
+    function showBanner(msg, color){
+      statusBanner.textContent = msg;
+      statusBanner.style.background = color;
+      statusBanner.classList.remove("hidden");
+      statusBanner.classList.add("visible");
+      setTimeout(()=> {
+        statusBanner.classList.remove("visible");
+        setTimeout(()=> statusBanner.classList.add("hidden"), 500);
+      }, 3000);
+    }
+
+    function respond(choice){
+      const note = document.getElementById("note").value.trim();
+      if (choice === "yes"){
+        statusMsg.textContent = "✅ Response recorded: I'm Responding" + (note ? " – " + note : "");
+        showBanner("✅ Response Recorded", "#2f6feb");
+      } else {
+        statusMsg.textContent = "❌ Response recorded: Can't Respond" + (note ? " – " + note : "");
+        showBanner("❌ Cannot Respond", "#c44");
+      }
+    }
+
+    document.getElementById("btnYes").onclick = () => respond("yes");
+    document.getElementById("btnNo").onclick  = () => respond("no");
+  </script>
+</body>
+</html>

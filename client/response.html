@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Emergency Response</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <div class="container narrow">
+    <header>
+      <h1>Emergency Response</h1>
+      <p class="subtitle">Let them know if you can help</p>
+    </header>
+    <section class="card">
+      <div id="respInfo" class="info"></div>
+      <div class="field">
+        <label>Optional note</label>
+        <textarea id="note" placeholder="e.g., On the way, 10 minutes out"></textarea>
+      </div>
+      <div class="actions">
+        <button id="btnYes" class="primary">✅ I'm Responding</button>
+        <button id="btnNo" class="secondary">❌ Can't Respond</button>
+      </div>
+    </section>
+  </div>
+  <script src="response.js"></script>
+</body>
+</html>
